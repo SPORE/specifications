@@ -39,8 +39,8 @@ create a programmatic interface in the target system.
 
 A I<Middleware> is Spore component that is added to the workflow of
 the I<Client implementation> to modify the I<Requests> and
-I<responses> sent and received. It can also shortcircuit the rest of
-the workflow if needed. It can be thought of a plugin to extend Spore.
+I<responses> sent and received. It can also shortcut the rest of
+the workflow if needed. It can be thought of as a plugin to extend Spore.
 
 =item Request
 
@@ -180,6 +180,16 @@ in the url with the placeholders when the request is made. The rest of
 them will be used in the C<QUERY_STRING> part of the uri and the
 payload key will define the actual content. B>MAY> be empty but
 B<MUST> always be present.
+
+=item *
+
+C<spore.max_redirect>: The maximum number of redirection to follow before
+failing the request.
+
+=item *
+
+C<spore.redirections>: An ordered list of all the intermediate urls that
+were tried by the fetcher.
 
 =item *
 
