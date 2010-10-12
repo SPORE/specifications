@@ -48,7 +48,7 @@ This part describes the API itself:
 
 =over 4
 
-=item B<name> (optional)
+=item B<name> (required)
 
 A simple name to describe the specification
 
@@ -75,17 +75,25 @@ A list of supported format
       - json
       - xml
 
-=item B<version> (optinal)
+=item B<version> (required)
 
 The version number of the current description
 
     version: 0.1
 
-=item B<authentication> (optional)
+=item B<api_authentication> (optional)
 
 A boolean to specify if this API requires authentication for all the methods
 
-    authentication: 1
+    api_authentication: true
+
+=item B<api_auth_type> (optional)
+
+A list of supported authentication methods
+
+    api_auth_type:
+      - simple
+      - oauth
 
 =item B<methods> (required)
 
@@ -151,7 +159,14 @@ documentation.
 
 A boolean to specify if this method requires authentication
 
-    authentication: 0
+    authentication: false
+
+=item B<auth_type> (optional)
+
+A list of supported authentication methods
+
+    auth_type:
+      - digest
 
 =item B<base_url> (optional)
 
