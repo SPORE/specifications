@@ -1,0 +1,255 @@
+=encoding utf-8
+
+=head1 NAME
+
+Spore (Specifications to a POrtable Rest Environment) Client Implementation
+
+=head1 ABSTRACT
+
+Spore is a specification for describing ReST API that can be parsed and used
+automatically by client implementations to communicate with the descibed API.
+
+This document describes what features are required in a Spore client
+implementation.
+
+=head1 TERMINOLOGY
+
+=over 4
+
+=item API
+
+An I<API> is a ReST application that can exchange data with client
+applications over http/https. It presents one or more method endpoints which
+accept http requests with varying headers, parameters and body content to
+perform specific operations.
+
+=item Client implementation
+
+A I<Client implementation> is a library targeting a specific system or
+language. It can use I<Descriptions files> to create programmatic interfaces
+usable in applications.
+
+=item Description file
+
+A I<Description file> is a file in JSON format describing an I<API> (see
+specification). It can directly be used by a  I<Client implementation> to
+create a programmatic interface in the target system.
+
+=item Middleware
+
+A I<Middleware> is Spore component that is added to the workflow of
+the I<Client implementation> to modify the I<Requests> and
+I<responses> sent and received. It can also shortcircuit the rest of
+the workflow if needed. It can be thought of a plugin to extend Spore.
+
+=item Request
+
+A I<Request> is a data structure that contains standardized data and
+metadata inspired by the CGI specification. It is used by the I<Client
+implementation> to create the http request that will be sent to the
+I<API>.
+
+=item Response
+
+A I<Response> is a data structure that contains standardized data and
+metadata inspired by the CGI specification. It is created from the
+http response sent by the I<API> and is used after being processed by
+the I<Middlewares> to create the structure returned to the user.
+
+=back
+
+=head1 SPECIFICATION
+
+=head2 Client Implementation
+
+A I<Client implementation> B<MUST> provide a function or method
+(eg. new_from_spec) to generate the specific API methods in the target
+system by reading the JSON string from a I<Description file> (and
+optionaly directly from the file itself).
+
+A I<Client implementation> B<MUST> also provide a method to enable or
+disable spore middlewares at runtime. The order in which the
+middlewares are enambled  is the order in which the request will go
+through each middleware, and the inverse order in which the response
+will go through each optional middleware postprocessing callback.
+
+  If middlewares I<A>, I<B> and I<C> were enabled in this order, then
+  the processing order will be:
+    I<A>, I<B>, I<C> ... make request ... I<C>, I<B>, I<A>
+
+=head2 Middleware
+
+Each middleware B<MUST> accept arbitrary initialization parameters. It
+B<MUST> also provide a function to which the request environment or an
+object containing it will be passed. The function can have 3 types of
+return values :
+
+=over 4
+
+=item Nothing
+
+Control is passed to the next middleware in the chain.
+
+=item A callback
+
+Control is passed to the next middleware in the chain. The callback is
+stored and will be passed the response later on after the request is
+made.
+
+=item A response
+
+The response is directly passed to the first stored callback in the
+chain. No further middlewares are used and no request is sent. Useful
+if a middleware needs to shortcicuit the remaining of the chain, for
+testing or caching purpose for exemple.
+
+=back
+
+=head3 The Request environment
+
+The request environment B<MUST> be a data structure that includes
+CGI-like headers, as detailed below. Each middleware is free to modify
+the environment. The environment B<MUST> include these keys (adopted
+from L<PEP 333|http://www.python.org/dev/peps/pep-0333/>,
+L<Rack|http://rack.rubyforge.org/doc/files/SPEC.html>,
+L<PSGI|http://search.cpan.org/perldoc?PSGI> and
+L<JSGI|http://jackjs.org/jsgi-spec.html>) except when they would
+normally be empty. The environment is used by the I<Client
+implementation> to build the final http request that will be sent to
+the I<API>.
+
+=over 4
+
+=item *
+
+C<REQUEST_METHOD>: The HTTP request method, such as "GET" or
+"POST". This B<MUST NOT> be an empty string, and so is always
+required.
+
+=item *
+
+C<SCRIPT_NAME>: The initial portion of the base URL's path, minus the
+schema and domain name. This tells the client what is the API virtual
+"location". This may be an empty string if the method corresponds to
+the server's root URI.
+
+If this key is not empty, it B<MUST> start with a forward slash (C</>).
+
+=item *
+
+C<PATH_INFO>: The remainder of the request URL's path, designating the
+virtual "location" of the request's target within the API. This may be
+an empty string if the request URL targets the application root and
+does not have a trailing slash. It still contains the placeholders
+which will be interpolated later with the params.
+
+If this key is not empty, it B<MUST> start with a forward slash (C</>).
+
+=item *
+
+C<REQUEST_URI>: The undecoded, raw request URL line. It is the raw URI
+path and query part that appears in the HTTP C<GET /... HTTP/1.x> line
+and doesn't contain URI scheme and host names. It still contains the
+placeholders which will be interpolated later with the params.
+
+=item *
+
+C<SERVER_NAME>, C<SERVER_PORT>: When combined with C<SCRIPT_NAME> and
+C<PATH_INFO>, these keys can be used to complete the URL. Note,
+however, that C<HTTP_HOST>, if present, should be used in preference
+to C<SERVER_NAME> for reconstructing the request URL. C<SERVER_NAME>
+and C<SERVER_PORT> B<MUST NOT> be empty strings, and are always
+required.
+
+=item *
+
+C<QUERY_STRING>: The portion of the request URL that follows the ?, if
+any. May be empty, but is always required. It will always be empty
+before the request is actually made and sent.
+
+=item *
+
+C<spore.payload>: The actual content body of the call. Modified in
+place by the middlewares.
+
+=item *
+
+C<spore.params>: A list of key/value pairs. These will be interpolated
+in the url with the placeholders when the request is made. The rest of
+them will be used in the C<QUERY_STRING> part of the uri. B>MAY> be
+empty but B<MUST> always be present.
+
+=item *
+
+C<spore.scheme>: !!! Check if url_scheme !! The scheme of the url.
+
+
+=item *
+
+C<spore.scheme>: !!! Check if url_scheme !! The scheme of the url.
+
+=back
+
+=head1 CHANGELOGS
+
+0.1: 2010.10.xx
+
+=over 4
+
+=item *
+
+Initial version.
+
+=back
+
+=head1 ACKNOWLEDGEMENTS
+
+Some parts of this specification are adopted from the following specifications.
+
+=over 4
+
+=item *
+
+PSGI Specification L<PSGI|http://search.cpan.org/perldoc?PSGI>
+
+=item *
+
+PEP333 Python Web Server Gateway Interface L<http://www.python.org/dev/peps/pep-0333>
+
+=item *
+
+Rack L<http://rack.rubyforge.org/doc/SPEC.html>
+
+=item *
+
+JSGI Specification L<http://jackjs.org/jsgi-spec.html>
+
+=back
+
+I'd like to thank authors of these great documents.
+
+=head1 AUTHOR
+
+=over 4
+
+=item franck cuny
+
+=item nils grunwald
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item damien "bl0b" leroux
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright XXX, 2010.
+
+This document is licensed under the Creative Commons license by-sa.
+
+=cut

@@ -1,0 +1,264 @@
+=encoding utf-8
+
+=head1 NAME
+
+Spore (Specifications to a POrtable Rest Environment) Description Implementation
+
+=head1 ABSTRACT
+
+Spore is a specification for describing ReST API that can be parsed and used
+automatically by client implementations to communicate with the descibed API.
+
+This document describes how to write the description for a ReST API in
+order to be used with a SPORE Client Implementation.
+
+=head1 TERMINOLOGY
+
+=over 4
+
+=item API
+
+An I<API> is a ReST application that can exchange data with client
+applications over http/https. It presents one or more method endpoints which
+accept http requests with varying headers, parameters and body content to
+perform specific operations.
+
+=item Client implementation
+
+A I<Client implementation> is a library targeting a specific system or
+language. It can use I<Descriptions files> to create programmatic interfaces
+usable in applications.
+
+=item Description file
+
+A I<Description file> is a file in JSON format describing an I<API> (see
+specification). It can directly be used by a  I<Client implementation> to
+create a programmatic interface in the target system.
+
+=back
+
+=head1 API DESCRIPTION
+
+An API should provide a description file. The description should be in JSON
+format.
+
+=head2 GENERIC DESCRIPTION
+
+This part describes the API itself:
+
+=over 4
+
+=item B<name> (optional)
+
+A simple name to describe the specification
+
+    name: CouchDB
+
+=item B<author> (optional)
+
+A list of authors for this specification
+
+    author:
+      - franck cuny <franck@lumberjaph.net>
+
+=item B<api_base_url> (optional)
+
+If the API has a fixed URL
+
+    api_base_url: http://api.twitter.com/1/
+
+=item B<api_format> (optional)
+
+A list of supported format
+
+    api_format:
+      - json
+      - xml
+
+=item B<version> (optinal)
+
+The version number of the current description
+
+    version: 0.1
+
+=item B<authentication> (optional)
+
+A boolean to specify if this API requires authentication for all the methods
+
+    authentication: 1
+
+=item B<methods> (required)
+
+A list of methods
+
+=back
+
+The desciption B<MUST> contain a list of at least one method
+
+=head2 METHOD DESCRIPTION
+
+A method must have a name:
+
+    public_timeline
+
+=over 4
+
+=item B<method> (required)
+
+An HTTP method
+
+    method: GET
+
+=item B<path> (required)
+
+Path for the given method. The path can contain B<placeholders>. A placeholder
+B<MUST> begin with a <:>:
+
+    path: /statuses/public_timeline.:format
+
+=item B<params> (optional)
+
+A list of parameters. This list will be used to replace value in placeholders,
+and if not used in the path, will be added to the query
+
+    params:
+      - trim_user
+      - include_entities
+
+=item B<required> (optional)
+
+A list of required parameters. Parameters that are required B<MUST NOT> be
+repeated in the B<params> field
+
+    required:
+      - format
+
+=item B<expected> (optional)
+
+A list of accepted HTTP status for this method
+
+    expected:
+      - 200
+
+=item B<description> (optional)
+
+A simple description for the method. This should not be considered as
+documentation.
+
+    description: Returns the 20 most recent statuses, including retweets if they exist, from non-protected users
+
+=item B<authentication> (optional)
+
+A boolean to specify if this method requires authentication
+
+    authentication: 0
+
+=item B<base_url> (optional)
+
+Specify an url if this method requires a different api_base_url
+
+    api_base_url: http://api.twitter.com/1/
+
+=item B<format> (optional)
+
+A list of supported format
+
+    api_format:
+      - json
+      - xml
+
+=item B<documentation> (optional)
+
+A complete documentation for the given method
+
+    documentation: The public timeline is cached for 60 seconds. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
+
+=back
+
+=head3 SAMPLE
+
+A description for the twitter API (only the API description part and the first method):
+
+    {
+        "api_base_url" : "http://api.twitter.com/1",
+        "version" : "0.1",
+        "methods" : {
+            "public_timeline" : {
+                "params" : [
+                    "trim_user",
+                    "include_entities"
+                ],
+                "required" : [
+                    "format"
+                ],
+                "path" : "/statuses/public_timeline.:format",
+                "method" : "GET"
+            },
+        }
+    }
+
+=head3 CALLS
+
+=head1 CHANGELOGS
+
+0.1: 2010.10.xx
+
+=over 4
+
+=item *
+
+Initial version.
+
+=back
+
+=head1 ACKNOWLEDGEMENTS
+
+Some parts of this specification are adopted from the following specifications.
+
+=over 4
+
+=item *
+
+PSGI Specification L<PSGI|http://search.cpan.org/perldoc?PSGI>
+
+=item *
+
+PEP333 Python Web Server Gateway Interface L<http://www.python.org/dev/peps/pep-0333>
+
+=item *
+
+Rack L<http://rack.rubyforge.org/doc/SPEC.html>
+
+=item *
+
+JSGI Specification L<http://jackjs.org/jsgi-spec.html>
+
+=back
+
+I'd like to thank authors of these great documents.
+
+=head1 AUTHOR
+
+=over 4
+
+=item franck cuny
+
+=item nils grunwald
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item damien "bl0b" leroux
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright XXX, 2010.
+
+This document is licensed under the Creative Commons license by-sa.
+
+=cut
