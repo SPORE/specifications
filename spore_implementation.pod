@@ -69,7 +69,7 @@ optionaly directly from the file itself).
 
 A I<Client implementation> B<MUST> also provide a method to enable or
 disable spore middlewares at runtime. The order in which the
-middlewares are enambled  is the order in which the request will go
+middlewares are enabled  is the order in which the request will go
 through each middleware, and the inverse order in which the response
 will go through each optional middleware postprocessing callback.
 
@@ -80,6 +80,7 @@ will go through each optional middleware postprocessing callback.
 =head2 Middleware
 
 Each middleware B<MUST> accept arbitrary initialization parameters. It
+B<MUST> provide a way to only conditionaly use a middleware (eg. B<enable_if>). It
 B<MUST> also provide a function to which the request environment or an
 object containing it will be passed. The function can have 3 types of
 return values :
@@ -176,8 +177,9 @@ place by the middlewares.
 
 C<spore.params>: A list of key/value pairs. These will be interpolated
 in the url with the placeholders when the request is made. The rest of
-them will be used in the C<QUERY_STRING> part of the uri. B>MAY> be
-empty but B<MUST> always be present.
+them will be used in the C<QUERY_STRING> part of the uri and the
+payload key will define the actual content. B>MAY> be empty but
+B<MUST> always be present.
 
 =item *
 
