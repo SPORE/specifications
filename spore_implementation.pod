@@ -181,12 +181,7 @@ empty but B<MUST> always be present.
 
 =item *
 
-C<spore.scheme>: !!! Check if url_scheme !! The scheme of the url.
-
-
-=item *
-
-C<spore.scheme>: !!! Check if url_scheme !! The scheme of the url.
+C<spore.scheme>: The scheme of the url.
 
 =back
 
