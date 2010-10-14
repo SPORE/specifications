@@ -2,6 +2,7 @@
  "type": "//rec",
  "optional": {
    "base_url":       "//str",
+   "description":    "//str",
    "authentication": "//bool",
    "version":        "//str",
    "author": {
