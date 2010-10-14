@@ -5,6 +5,7 @@
    "description":    "//str",
    "authentication": "//bool",
    "version":        "//str",
+   "authority":      "//str",
    "format": {
      "type"    : "//arr",
      "contents": { "type":"//str" }
