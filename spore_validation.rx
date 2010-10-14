@@ -34,12 +34,16 @@
              "type": "//int"
            }
          },
-         "params": {
-           "type": "//map",
-           "values": {
-             "type": "//arr",
-             "contents": {"type": "//str"}
-           }
+         "required": {
+           "type"    : "//arr",
+           "contents": {
+             "type": "//str"
+           },
+         "optional": {
+           "type": "//arr",
+           "contents": {
+             "type": "//str"
+           },
          },
          "description":    "//str",
          "authentication": "//bool",
