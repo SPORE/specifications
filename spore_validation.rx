@@ -5,11 +5,6 @@
    "description":    "//str",
    "authentication": "//bool",
    "version":        "//str",
-   "author": {
-     "type"    : "//arr",
-     "length"  : { "min": 1 },
-     "contents": { "type": "//str" }
-   },
    "format": {
      "type"    : "//arr",
      "contents": { "type":"//str" }
