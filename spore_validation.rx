@@ -1,0 +1,58 @@
+{
+ "type": "//rec",
+ "optional": {
+   "api_base_url":       "//str",
+   "api_authentication": "//bool",
+   "version":            "//str",
+   "author": {
+     "type"    : "//arr",
+     "length"  : { "min": 1 },
+     "contents": { "type": "//str" }
+   },
+   "api_format": {
+     "type"    : "//arr",
+     "contents": { "type":"//str" }
+   },
+   "meta": {
+     "type": "//map",
+     "values": {
+       "type": "//str"
+     }
+   }
+ },
+ "required": {
+   "name": "//str",
+   "methods": {
+     "type": "//map",
+     "values": {
+       "type": "//rec",
+       "required": {
+         "method": "//str",
+         "path":   "//str"
+       },
+       "optional": {
+         "expected": {
+           "type"    : "//arr",
+           "contents": {
+             "type": "//int"
+           }
+         },
+         "params": {
+           "type": "//map",
+           "values": {
+             "type": "//arr",
+             "contents": {"type": "//str"}
+           }
+         },
+         "description":    "//str",
+         "authentication": "//bool",
+         "base_url":       "//str",
+         "format": {
+           "type"    : "//arr",
+           "contents": { "type":"//str" }
+         }
+       }
+     }
+   }
+ }
+}
