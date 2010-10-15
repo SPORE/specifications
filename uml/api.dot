@@ -1,0 +1,13 @@
+digraph {
+
+    node [shape=record];
+
+    "Method"
+        [label="{\N|authentication : boolean\lbase_url : string\ldescription : string\lexpected : table&lt;number&gt;\lformat : table&lt;string&gt;\lmethod : string\loptional : table&lt;string&gt;\lpath : string\lrequired : table&lt;string&gt;\l}"];
+
+    "API"
+        [label="{\N|authentication : boolean\lauthority : string\lbase_url : string\ldescription : string\lformat : table&lt;string&gt;\lmeta : table&lt;string,string&gt;\lmethods : table&lt;string,Method&gt;\lname : string\lversion : string\l}"];
+    "API" -> "Method" // attr isa table<string,Method>
+        [label = "methods", arrowhead = none, arrowtail = odiamond];
+
+}
