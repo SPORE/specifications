@@ -6,7 +6,7 @@
    "authentication": "//bool",
    "version":        "//str",
    "authority":      "//str",
-   "format": {
+   "formats": {
      "type"    : "//arr",
      "contents": { "type":"//str" }
    },
@@ -48,7 +48,7 @@
          "description":    "//str",
          "authentication": "//bool",
          "base_url":       "//str",
-         "format": {
+         "formats": {
            "type"    : "//arr",
            "contents": { "type":"//str" }
          }
