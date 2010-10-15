@@ -28,18 +28,18 @@
          "path":   "//str"
        },
        "optional": {
-         "expected": {
+         "expected_status": {
            "type"    : "//arr",
            "contents": {
              "type": "//int"
            }
          },
-         "required": {
+         "required_params": {
            "type"    : "//arr",
            "contents": {
              "type": "//str"
            },
-         "optional": {
+         "optional_params": {
            "type": "//arr",
            "contents": {
              "type": "//str"
