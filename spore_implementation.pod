@@ -183,17 +183,16 @@ B<MUST> always be present.
 
 =item *
 
-C<spore.max_redirect>: The maximum number of redirection to follow before
-failing the request.
-
-=item *
-
 C<spore.redirections>: An ordered list of all the intermediate urls that
 were tried by the fetcher.
 
 =item *
 
 C<spore.scheme>: The scheme of the url.
+
+=item *
+
+C<spore.expected_status>: The list of expected HTTP status for this request in the response.
 
 =back
 
