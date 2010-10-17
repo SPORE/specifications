@@ -38,12 +38,13 @@
            "type"    : "//arr",
            "contents": {
              "type": "//str"
-           },
+           }
+         },
          "optional_params": {
            "type": "//arr",
            "contents": {
              "type": "//str"
-           },
+           }
          },
          "description":    "//str",
          "authentication": "//bool",
