@@ -54,24 +54,23 @@ A simple name to describe the specification
 
     name: CouchDB
 
-=item B<author> (optional)
+=item B<authority> (optional)
 
-A list of authors for this specification
+The authority of the description
 
-    author:
-      - franck cuny <franck@lumberjaph.net>
+    authorithy: GITHUB:franckcuny
 
-=item B<api_base_url> (optional)
+=item B<base_url> (optional)
 
 If the API has a fixed URL
 
-    api_base_url: http://api.twitter.com/1/
+    base_url: http://api.twitter.com/1/
 
-=item B<api_format> (optional)
+=item B<formats> (optional)
 
 A list of supported format
 
-    api_format:
+    formats:
       - json
       - xml
 
@@ -85,15 +84,7 @@ The version number of the current description
 
 A boolean to specify if this API requires authentication for all the methods
 
-    api_authentication: true
-
-=item B<api_auth_type> (optional)
-
-A list of supported authentication methods
-
-    api_auth_type:
-      - simple
-      - oauth
+    authentication: true
 
 =item B<methods> (required)
 
@@ -124,28 +115,26 @@ B<MUST> begin with a <:>:
 
     path: /statuses/public_timeline.:format
 
-=item B<params> (optional)
+=item B<optional_params> (optional)
 
-A list of parameters. This list will be used to replace value in placeholders,
-and if not used in the path, will be added to the query
+A list of optional parameters. This list will be used to replace value in placeholders, and if not used in the path, will be added to the query
 
-    params:
+    optional_params:
       - trim_user
       - include_entities
 
-=item B<required> (optional)
+=item B<required_params> (optional)
 
-A list of required parameters. Parameters that are required B<MUST NOT> be
-repeated in the B<params> field
+A list of required parameters. Parameters that are required B<MUST NOT> be repeated in the B<optional_params> field
 
-    required:
+    required_params:
       - format
 
-=item B<expected> (optional)
+=item B<expected_status> (optional)
 
 A list of accepted HTTP status for this method
 
-    expected:
+    expected_status:
       - 200
 
 =item B<description> (optional)
@@ -161,24 +150,17 @@ A boolean to specify if this method requires authentication
 
     authentication: false
 
-=item B<auth_type> (optional)
-
-A list of supported authentication methods
-
-    auth_type:
-      - digest
-
 =item B<base_url> (optional)
 
 Specify an url if this method requires a different api_base_url
 
-    api_base_url: http://api.twitter.com/1/
+    base_url: http://api.twitter.com/1/
 
-=item B<format> (optional)
+=item B<formats> (optional)
 
 A list of supported format
 
-    api_format:
+    formats:
       - json
       - xml
 
@@ -195,20 +177,20 @@ A complete documentation for the given method
 A description for the twitter API (only the API description part and the first method):
 
     {
-        "api_base_url" : "http://api.twitter.com/1",
+        "base_url" : "http://api.twitter.com/1",
         "version" : "0.1",
         "methods" : {
             "public_timeline" : {
-                "params" : [
+                "optional_params" : [
                     "trim_user",
                     "include_entities"
                 ],
-                "required" : [
+                "required_params" : [
                     "format"
                 ],
                 "path" : "/statuses/public_timeline.:format",
                 "method" : "GET"
-            },
+            }
         }
     }
 
@@ -267,6 +249,8 @@ I'd like to thank authors of these great documents.
 =over 4
 
 =item damien "bl0b" leroux
+
+=item François Perrad
 
 =back
 
