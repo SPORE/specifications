@@ -2,12 +2,13 @@ digraph {
 
     node [shape=record];
 
-    "Method"
-        [label="{\N|authentication : boolean\lbase_url : string\ldescription : string\lexpected_status : table&lt;number&gt;\lformats : table&lt;string&gt;\lmethod : string\loptional_params : table&lt;string&gt;\lpath : string\lrequired_params : table&lt;string&gt;\l}"];
-
     "API"
-        [label="{\N|authentication : boolean\lauthority : string\lbase_url : string\ldescription : string\lformats : table&lt;string&gt;\lmeta : table&lt;string,string&gt;\lmethods : table&lt;string,Method&gt;\lname : string\lversion : string\l}"];
-    "API" -> "Method" // attr isa table<string,Method>
+        [label="{\N|methods : map&lt;string,Method&gt;\lname : string\l\lauthentication : boolean\lauthority : string\lbase_url : string\ldescription : string\lformats : array&lt;string&gt;\lmeta : map&lt;string,string&gt;\lversion : string\l}"];
+
+    "API" -> "Method"
         [label = "methods", arrowhead = none, arrowtail = odiamond];
+
+    "Method"
+        [label="{\N|method : string\lpath : string\l\lauthentication : boolean\lbase_url : string\ldescription : string\lexpected_status : array&lt;number&gt;\lformats : array&lt;string&gt;\loptional_params : array&lt;string&gt;\lrequired_params : array&lt;string&gt;\l}"];
 
 }
