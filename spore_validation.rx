@@ -1,6 +1,12 @@
 {
  "type": "//rec",
  "optional": {
+   "expected_status": {
+        "type"    : "//arr",
+        "contents": {
+        "type": "//int"
+      }
+   },
    "base_url":       "//str",
    "description":    "//str",
    "authentication": "//bool",
