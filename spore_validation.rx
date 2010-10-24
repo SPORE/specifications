@@ -52,6 +52,7 @@
              "type": "//str"
            }
          },
+         "required_payload": "//bool",
          "description":    "//str",
          "authentication": "//bool",
          "base_url":       "//str",
