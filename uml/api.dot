@@ -3,12 +3,12 @@ digraph {
     node [shape=record];
 
     "API"
-        [label="{\N|methods : map&lt;string,Method&gt;\lname : string\l\lauthentication : boolean\lauthority : string\lbase_url : string\ldescription : string\lformats : array&lt;string&gt;\lmeta : map&lt;string,string&gt;\lversion : string\l}"];
+        [label="{\N|methods : map&lt;string,Method&gt;\lname : string\l\lauthentication : boolean\lauthority : string\lbase_url : string\ldescription : string\lexpected_status : array&lt;number&gt;\lformats : array&lt;string&gt;\lmeta : map&lt;string,string&gt;\lversion : string\l}"];
 
     "API" -> "Method"
         [label = "methods", arrowhead = none, arrowtail = odiamond];
 
     "Method"
-        [label="{\N|method : string\lpath : string\l\lauthentication : boolean\lbase_url : string\ldescription : string\lexpected_status : array&lt;number&gt;\lformats : array&lt;string&gt;\loptional_params : array&lt;string&gt;\lrequired_params : array&lt;string&gt;\l}"];
+        [label="{\N|method : string\lpath : string\l\lauthentication : boolean\lbase_url : string\ldescription : string\lexpected_status : array&lt;number&gt;\lform-data : map&lt;string,string&gt;\lformats : array&lt;string&gt;\loptional_params : array&lt;string&gt;\lrequired_params : array&lt;string&gt;\lrequired_payload : boolean\l}"];
 
 }
