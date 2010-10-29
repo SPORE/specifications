@@ -58,6 +58,12 @@
              "type": "//str"
            }
          },
+         "headers" : {
+           "type": "//map",
+           "values": {
+             "type": "//str"
+           }
+         },
          "required_payload": "//bool",
          "description":    "//str",
          "authentication": "//bool",
