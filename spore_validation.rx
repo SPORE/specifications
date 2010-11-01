@@ -66,6 +66,7 @@
            }
          },
          "required_payload": "//bool",
+         "optional_payload": "//bool",
          "unattended_params": "//bool",
          "description":    "//str",
          "authentication": "//bool",
