@@ -69,6 +69,7 @@
          "optional_payload": "//bool",
          "unattended_params": "//bool",
          "description":    "//str",
+         "deprecated": "//bool",
          "authentication": "//bool",
          "base_url":       "//str",
          "formats": {
