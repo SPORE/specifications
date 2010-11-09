@@ -1,0 +1,14 @@
+digraph {
+
+    node [shape=record];
+
+    "API"
+        [label="{\N|methods : map&lt;string,Method&gt;\lname : string\l}"];
+
+    "API" -> "Method"
+        [label="methods", dir=back, arrowtail=odiamond];
+
+    "Method"
+        [label="{\N|method : string\lpath : string\l\lauthentication : boolean\lbase_url : string\ldeprecated : boolean\ldescription : string\lexpected_status : array&lt;number&gt;\lform-data : map&lt;string,string&gt;\lformats : array&lt;string&gt;\lheaders : map&lt;string,string&gt;\loptional_params : array&lt;string&gt;\loptional_payload : boolean\lrequired_params : array&lt;string&gt;\lrequired_payload : boolean\lunattended_params : boolean\l}"];
+
+}
