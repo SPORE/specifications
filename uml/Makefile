@@ -1,6 +1,6 @@
 
-api.png: api.dot
-	dot -T png -o api.png api.dot
+abstract_syntax_tree.png: abstract_syntax_tree.dot
+	dot -T png -o $@ $< 
 
 clean:
 	rm *.png
