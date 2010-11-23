@@ -14,163 +14,195 @@ order to be used with a SPORE Client Implementation.
 
 =head1 TERMINOLOGY
 
-=over 4
-
-=item API
+=head2 API
 
 An I<API> is a ReST application that can exchange data with client
 applications over http/https. It presents one or more method endpoints which
 accept http requests with varying headers, parameters and body content to
 perform specific operations.
 
-=item Client implementation
+=head2 Client Implementation
 
-A I<Client implementation> is a library targeting a specific system or
+A I<Client Implementation> is a library targeting a specific system or
 language. It can use I<Descriptions files> to create programmatic interfaces
 usable in applications.
 
-=item Description file
+=head2 Description File
 
-A I<Description file> is a file in JSON format describing an I<API> (see
+A I<Description File> is a file in JSON format describing an I<API> (see
 specification). It can directly be used by a  I<Client implementation> to
 create a programmatic interface in the target system.
 
-=back
+=head2 Payload
+
+The I<Payload> is the data sent in the body of a POST or PUT request.
+The Payload is unrelated to method parameters defined herein.
+
+=head2 Format
+
+The I<Format> is the kind of data serialization used for the Payload.
 
 =head1 API DESCRIPTION
 
-An API should provide a description file. The description should be in JSON
-format.
+An API should provide a description file, in JSON format, that conforms with this description.
 
 =head2 GENERIC DESCRIPTION
 
-This part describes the API itself:
+This part describes the overall API and provides some default values for the
+individual method descriptions.
 
-=over 4
+=head3 name
 
-=item B<name> (required)
+A required simple name to describe the specification
 
-A simple name to describe the specification
+    "name" : "CouchDB"
 
-    name: CouchDB
+=head3 authority
 
-=item B<authority> (optional)
+An optional authority of the description
 
-The authority of the description
+    "authority" : "GITHUB:franckcuny"
 
-    authorithy: GITHUB:franckcuny
+=head3 base_url
 
-=item B<base_url> (optional)
+An optional base URL for the API
 
-If the API has a fixed URL
+    "base_url" : "http://api.twitter.com/1/"
 
-    base_url: http://api.twitter.com/1/
+=head3 formats
 
-=item B<formats> (optional)
+A list of supported formats
 
-A list of supported format
+    "formats" : [
+      "json"
+      "xml"
+    ]
 
-    formats:
-      - json
-      - xml
+=head3 version
 
-=item B<version> (required)
+A mandatory version number of the SPORE description of the API, expressed as a string
 
-The version number of the current description
+    "version" : "0.1"
 
-    version: 0.1
+=head3 authentication
 
-=item B<api_authentication> (optional)
+An optional boolean to specify if this API requires authentication for all the methods
 
-A boolean to specify if this API requires authentication for all the methods
+    "authentication" : true
 
-    authentication: true
+The default is false.
 
-=item B<methods> (required)
+=head3 methods
 
-A list of methods
+A mandatory hash of method names and specifications.
+See L</METHOD DESCRIPTION>.
 
-=back
+    "methods" : { ... }
 
-The desciption B<MUST> contain a list of at least one method
+The C<methods> hash B<MUST> contain at least one method.
 
 =head2 METHOD DESCRIPTION
 
-A method must have a name:
+A method must have a name, which is the key in the L</methods> hash
 
-    public_timeline
+    "methods" : {
+        "public_timeline" : { ... }
+    }
 
-=over 4
+=head3 method
 
-=item B<method> (required)
+The mandatory C<method> attribute specifies the HTTP method to use for this call
 
-An HTTP method
+    "method" : "GET"
 
-    method: GET
+=head3 path
 
-=item B<path> (required)
+The mandatory C<path> attribute specifies the URI path for this method.
 
-Path for the given method. The path can contain B<placeholders>. A placeholder
+    "path" : "/login"
+
+The path can contain I<placeholders>. A placeholder
 B<MUST> begin with a <:>:
 
-    path: /statuses/public_timeline.:format
+    "path" : "/statuses/public_timeline.:format"
 
-=item B<optional_params> (optional)
+XXX How can non-placeholder :foo's be included in the path? ie is there an escape mechanism?
+XXX What happens in this example if 'format' isn't listed in params/required?
+XXX What happens if a parameter needs to be followed by a word character? ie can something like :{format}foo be used?
 
-A list of optional parameters. This list will be used to replace value in placeholders, and if not used in the path, will be added to the query
+=head3 optional_params
 
-    optional_params:
-      - trim_user
-      - include_entities
+An optional list of optional parameters (contrast with L</required_params>).
+This list will be used to replace value in placeholders, and if not used in the
+path, will be added to the query part of the request URL.
 
-=item B<required_params> (optional)
+    "optional_params" : [
+      "trim_user",
+      "include_entities"
+    ]
 
-A list of required parameters. Parameters that are required B<MUST NOT> be repeated in the B<optional_params> field
+=head3 required_params
 
-    required_params:
-      - format
+An optional list of required parameters (contrast with L</optional_params>).
+This list will be used to replace value in placeholders and, if not used in the
+path, will be added to the query part of the request URL.
 
-=item B<expected_status> (optional)
+Parameters that are required B<MUST NOT> be repeated in the B<optional_params> field
 
-A list of accepted HTTP status for this method
+    "required" : [
+      "format"
+    ]
 
-    expected_status:
-      - 200
+=head3 expected_status
 
-=item B<description> (optional)
+An optional list of accepted HTTP status codes for this method
 
-A simple description for the method. This should not be considered as
+    "expected" : [
+      200,
+      204
+    ]
+
+If C<expected> is specified then an exception will be thrown if the response
+status is not in the list.  If C<expected> is not specified then an exception
+will be thrown if the response status is not in the range 200 thru 299.
+
+XXX a global default_expected could be handy.
+
+=head3 description
+
+An optional simple description for the method. This should not be considered as
 documentation.
 
-    description: Returns the 20 most recent statuses, including retweets if they exist, from non-protected users
+    "description" : "Returns the 20 most recent statuses, including retweets if they exist, from non-protected users"
 
-=item B<authentication> (optional)
+=head3 authentication
 
-A boolean to specify if this method requires authentication
+An optional boolean to specify if this method requires authentication
 
-    authentication: false
+    "authentication" : false
 
-=item B<base_url> (optional)
+=head3 base_url
 
-Specify an url if this method requires a different api_base_url
+An optional base url for this method, if different to the default specified above.
 
     base_url: http://api.twitter.com/1/
 
-=item B<formats> (optional)
+XXX might be nice to be able to express this as a relative url (relative to api_base_url) That could be handled at build time.
 
-A list of supported format
+=head3 formats
 
-    formats:
-      - json
-      - xml
+An optional list of supported formats
 
-=item B<documentation> (optional)
+    "format" : [
+      "json",
+      "xml"
+    ]
 
-A complete documentation for the given method
+=head3 documentation
 
-    documentation: The public timeline is cached for 60 seconds. Requesting more frequently than that will not return any more data, and will count against your rate limit usage.
+Optional detailed documentation for the given method
 
-=back
+    "documentation" : "The public timeline is cached for 60 seconds. Requesting more frequently than that will not return any more data, and will count against your rate limit usage."
 
 =head3 SAMPLE
 
@@ -196,17 +228,13 @@ A description for the twitter API (only the API description part and the first m
 
 =head3 CALLS
 
-=head1 CHANGELOGS
+XXX
 
-0.1: 2010.10.xx
+=head1 CHANGES
 
-=over 4
-
-=item *
+=head2 0.1 - 2010.10.xx
 
 Initial version.
-
-=back
 
 =head1 ACKNOWLEDGEMENTS
 
@@ -251,6 +279,8 @@ I'd like to thank authors of these great documents.
 =item damien "bl0b" leroux
 
 =item François Perrad
+
+=item Tim Bunce
 
 =back
 
