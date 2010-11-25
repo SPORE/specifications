@@ -13,3 +13,4 @@
  * [Nodejs](http://github.com/francois2metz/node-spore)
  * [Perl](http://github.com/franckcuny/net-http-spore)
  * [Python](http://github.com/elishowk/pyspore)
+ * [Ruby](http://github.com/sukria/Ruby-Spore)
