@@ -69,9 +69,12 @@ optionaly directly from the file itself).
 
 A I<Client implementation> B<MUST> also provide a method to enable or
 disable spore middlewares at runtime. The order in which the
-middlewares are enabled  is the order in which the request will go
+middlewares are enabled is the order in which the request will go
 through each middleware, and the inverse order in which the response
-will go through each optional middleware postprocessing callback.
+will go through each optional middleware postprocessing callback. It
+B<MUST> also have a method to selectively enable a middleware or not
+for each method according to the method properties in the
+specification.
 
   If middlewares I<A>, I<B> and I<C> were enabled in this order, then
   the processing order will be:
