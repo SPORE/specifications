@@ -19,8 +19,8 @@ implementation.
 =item API
 
 An I<API> is a ReST application that can exchange data with client
-applications over http/https. It presents one or more method endpoints which
-accept http requests with varying headers, parameters and body content to
+applications over HTTP/HTTPS. It presents one or more method endpoints which
+accept HTTP requests with varying headers, parameters and body content to
 perform specific operations.
 
 =item Client implementation
@@ -46,14 +46,14 @@ the workflow if needed. It can be thought of as a plugin to extend Spore.
 
 A I<Request> is a data structure that contains standardized data and
 metadata inspired by the CGI specification. It is used by the I<Client
-implementation> to create the http request that will be sent to the
+implementation> to create the HTTP request that will be sent to the
 I<API>.
 
 =item Response
 
 A I<Response> is a data structure that contains standardized data and
 metadata inspired by the CGI specification. It is created from the
-http response sent by the I<API> and is used after being processed by
+HTTP response sent by the I<API> and is used after being processed by
 the I<Middlewares> to create the structure returned to the user.
 
 =back
@@ -63,7 +63,7 @@ the I<Middlewares> to create the structure returned to the user.
 =head2 Client Implementation
 
 A I<Client implementation> B<MUST> provide a function or method
-(eg. new_from_spec) to generate the specific API methods in the target
+(e.g. new_from_spec) to generate the specific API methods in the target
 system by reading the JSON string from a I<Description file> (and
 optionaly directly from the file itself).
 
@@ -83,10 +83,10 @@ specification.
 =head2 Middleware
 
 Each middleware B<MUST> accept arbitrary initialization parameters. It
-B<MUST> provide a way to only conditionaly use a middleware (eg. B<enable_if>). It
+B<MUST> provide a way to only conditionaly use a middleware (e.g. B<enable_if>). It
 B<MUST> also provide a function to which the request environment or an
 object containing it will be passed. The function can have 3 types of
-return values :
+return values:
 
 =over 4
 
@@ -104,7 +104,7 @@ made.
 
 The response is directly passed to the first stored callback in the
 chain. No further middlewares are used and no request is sent. Useful
-if a middleware needs to shortcicuit the remaining of the chain, for
+if a middleware needs to shortcircuit the remaining of the chain, for
 testing or caching purpose for exemple.
 
 =back
@@ -119,7 +119,7 @@ L<Rack|http://rack.rubyforge.org/doc/files/SPEC.html>,
 L<PSGI|http://search.cpan.org/perldoc?PSGI> and
 L<JSGI|http://jackjs.org/jsgi-spec.html>) except when they would
 normally be empty. The environment is used by the I<Client
-implementation> to build the final http request that will be sent to
+implementation> to build the final HTTP request that will be sent to
 the I<API>.
 
 =over 4
@@ -133,7 +133,7 @@ required.
 =item *
 
 C<SCRIPT_NAME>: The initial portion of the base URL's path, minus the
-schema and domain name. This tells the client what is the API virtual
+scheme and domain name. This tells the client what is the API virtual
 "location". This may be an empty string if the method corresponds to
 the server's root URI.
 
@@ -167,7 +167,7 @@ required.
 
 =item *
 
-C<QUERY_STRING>: The portion of the request URL that follows the ?, if
+C<QUERY_STRING>: The portion of the request URL that follows the C<?>, if
 any. May be empty, but is always required. It will always be empty
 before the request is actually made and sent.
 
@@ -179,23 +179,23 @@ place by the middlewares.
 =item *
 
 C<spore.params>: A list of key/value pairs. These will be interpolated
-in the url with the placeholders when the request is made. The rest of
-them will be used in the C<QUERY_STRING> part of the uri and the
-payload key will define the actual content. B>MAY> be empty but
+in the URL with the placeholders when the request is made. The rest of
+them will be used in the C<QUERY_STRING> part of the URI and the
+payload key will define the actual content. B<MAY> be empty but
 B<MUST> always be present.
 
 =item *
 
-C<spore.redirections>: An ordered list of all the intermediate urls that
+C<spore.redirections>: An ordered list of all the intermediate URL that
 were tried by the fetcher.
 
 =item *
 
-C<spore.scheme>: The scheme of the url.
+C<spore.scheme>: The scheme of the URL.
 
 =item *
 
-C<spore.expected_status>: The list of expected HTTP status for this request in the response.
+C<spore.expected_status>: The list of expected HTTP statuses for this request in the response.
 
 =back
 
