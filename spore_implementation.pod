@@ -6,7 +6,8 @@ Spore (B<S>pecifications to a B<Po>rtable B<R>EST B<E>nvironment) Description Im
 
 =head1 ABSTRACT
 
-Spore is a specification for describing REST API that can be parsed and used
+Spore is a specification for describing HTTP APIs which happen to suffice some
+constraints laid out by the REST architectural style. It can be parsed and used
 automatically by client implementations to communicate with the described API.
 
 This document describes what features are required in a Spore client
@@ -18,7 +19,7 @@ implementation.
 
 =item API
 
-An I<API> is a REST application that can exchange data with client
+An I<API> is the interface to an application that can exchange data with client
 applications over HTTP/HTTPS. It presents one or more method endpoints which
 accept HTTP requests with varying headers, parameters and body content to
 perform specific operations.

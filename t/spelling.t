@@ -26,6 +26,7 @@ Perrad
 
 ## computerese
 API
+APIs
 CGI
 JSGI
 JSON
