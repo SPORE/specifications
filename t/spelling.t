@@ -34,6 +34,8 @@ PSGI
 URL's
 
 ## other jargon
+ShareAlike
+Unported
 
 ## neologisms
 

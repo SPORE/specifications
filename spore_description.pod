@@ -289,6 +289,7 @@ I'd like to thank authors of these great documents.
 
 Copyright XXX, 2010.
 
-This document is licensed under the Creative Commons license by-sa.
+This work is licensed under a L<Creative Commons Attribution-ShareAlike 3.0
+Unported License|http://creativecommons.org/licenses/by-sa/3.0/>.
 
 =cut
