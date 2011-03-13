@@ -2,23 +2,23 @@
 
 =head1 NAME
 
-Spore (Specifications to a POrtable Rest Environment) Description Implementation
+Spore (B<S>pecifications to a B<Po>rtable B<R>EST B<E>nvironment) Description Implementation
 
 =head1 ABSTRACT
 
-Spore is a specification for describing ReST API that can be parsed and used
-automatically by client implementations to communicate with the descibed API.
+Spore is a specification for describing REST API that can be parsed and used
+automatically by client implementations to communicate with the described API.
 
-This document describes how to write the description for a ReST API in
+This document describes how to write the description for a REST API in
 order to be used with a SPORE Client Implementation.
 
 =head1 TERMINOLOGY
 
 =head2 API
 
-An I<API> is a ReST application that can exchange data with client
-applications over http/https. It presents one or more method endpoints which
-accept http requests with varying headers, parameters and body content to
+An I<API> is a REST application that can exchange data with client
+applications over HTTP/HTTPS. It presents one or more method endpoints which
+accept HTTP requests with varying headers, parameters and body content to
 perform specific operations.
 
 =head2 Client Implementation
@@ -126,9 +126,9 @@ B<MUST> begin with a <:>:
 
     "path" : "/statuses/public_timeline.:format"
 
-XXX How can non-placeholder :foo's be included in the path? ie is there an escape mechanism?
+XXX How can non-placeholder :foo's be included in the path? i.e. is there an escape mechanism?
 XXX What happens in this example if 'format' isn't listed in params/required?
-XXX What happens if a parameter needs to be followed by a word character? ie can something like :{format}foo be used?
+XXX What happens if a parameter needs to be followed by a word character? i.e. can something like :{format}foo be used?
 
 =head3 optional_params
 
@@ -164,7 +164,7 @@ An optional list of accepted HTTP status codes for this method
 
 If C<expected> is specified then an exception will be thrown if the response
 status is not in the list.  If C<expected> is not specified then an exception
-will be thrown if the response status is not in the range 200 thru 299.
+will be thrown if the response status is not in the range 200 through 299.
 
 XXX a global default_expected could be handy.
 
@@ -183,11 +183,11 @@ An optional boolean to specify if this method requires authentication
 
 =head3 base_url
 
-An optional base url for this method, if different to the default specified above.
+An optional base URL for this method, if different to the default specified above.
 
     base_url: http://api.twitter.com/1/
 
-XXX might be nice to be able to express this as a relative url (relative to api_base_url) That could be handled at build time.
+XXX might be nice to be able to express this as a relative URL (relative to api_base_url) That could be handled at build time.
 
 =head3 formats
 
