@@ -2,8 +2,12 @@
 
 ## SPECIFICATIONS
 
- *  [API Description](http://github.com/spore/)
+ *  [API Description](http://github.com/spore/api-description)
  *  [Client Implementation](http://github.com/spore/)
+
+## DISCUSSIONS
+
+ * [mailling list](http://groups.google.com/group/spore-rest)
 
 ## IMPLEMENTATIONS
 
