@@ -53,6 +53,12 @@
              "type": "//str"
            }
          },
+         "payload" : {
+           "type": "//arr",
+           "contents": {
+             "type": "//str"
+           }
+         },
          "form-data" : {
            "type": "//map",
            "values": {
