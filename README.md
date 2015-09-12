@@ -29,6 +29,8 @@ The goal of this git repository is to host:
  * [Perl](http://github.com/franckcuny/net-http-spore)
  * [Python](http://github.com/agrausem/britney)
  * [Ruby](http://github.com/sukria/Ruby-Spore)
+ * [Livescript](https://github.com/unistra/ls-spore)
+ * [Groovy](https://github.com/geoffroybeck/gspore)
 
 ## DISCUSSIONS
 
