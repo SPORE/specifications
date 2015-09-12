@@ -27,7 +27,7 @@ The goal of this git repository is to host:
  * [Lua](http://github.com/fperrad/lua-Spore/)
  * [Nodejs](http://github.com/francois2metz/node-spore)
  * [Perl](http://github.com/franckcuny/net-http-spore)
- * [Python](http://github.com/elishowk/pyspore)
+ * [Python](http://github.com/agrausem/britney)
  * [Ruby](http://github.com/sukria/Ruby-Spore)
 
 ## DISCUSSIONS
