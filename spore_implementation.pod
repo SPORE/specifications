@@ -68,8 +68,8 @@ A I<Client implementation> B<MUST> provide a function or method
 system by reading the JSON string from a I<Description file> (and
 optionally directly from the file itself).
 
-A I<Client implementation> B<MUST> also provide a method to enable or
-disable spore middlewares at run-time. The order in which the
+A I<Client implementation> B<MUST> also provide a method to enable
+spore middlewares at run-time. The order in which the
 middlewares are enabled is the order in which the request will go
 through each middleware, and the inverse order in which the response
 will go through each optional middleware post-processing callback. It
