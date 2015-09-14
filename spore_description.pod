@@ -122,10 +122,12 @@ The mandatory C<path> attribute specifies the URI path for this method.
 
     "path" : "/login"
 
-The path can contain I<placeholders>. A placeholder
-B<MUST> begin with a <:>:
+The path can contain I<placeholders>. A placeholder B<MUST> begin with a C<:>
+or be surrounded by a C<{> and a C<}> like in the RFC 6570 URI Template:
 
     "path" : "/statuses/public_timeline.:format"
+
+    "path" : "/statuses/public_timeline.{format}"
 
 XXX How can non-placeholder :foo's be included in the path? i.e. is there an escape mechanism?
 XXX What happens in this example if 'format' isn't listed in params/required?
