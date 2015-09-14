@@ -156,6 +156,19 @@ Parameters that are required B<MUST NOT> be repeated in the B<optional_params> f
       "format"
     ]
 
+=head3 payload
+
+An optional list of parameters which could be in B<required_params> or B<optional_params>.
+This list will be used to create a payload data structure.
+
+The option C<payload> B<MUST NOT> used the options C<required_payload> or C<optional_payload>
+which handle opaque payload.
+
+    "payload" : [
+      "key1",
+      "key2"
+    ]
+
 =head3 expected_status
 
 An optional list of accepted HTTP status codes for this method
