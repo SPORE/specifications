@@ -169,6 +169,19 @@ which handle opaque payload.
       "key2"
     ]
 
+=head3 optional_payload
+
+An optional boolean which handle opaque payload.
+
+=head3 required_payload
+
+An optional boolean which handle opaque payload.
+
+=head3 unattended_params
+
+An optional boolean which allows unattented parameters.
+These parameters will be added to the query part of the request URL.
+
 =head3 expected_status
 
 An optional list of accepted HTTP status codes for this method
