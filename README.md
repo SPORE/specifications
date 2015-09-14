@@ -30,7 +30,7 @@ The goal of this git repository is to host:
  * [Python](http://github.com/agrausem/britney)
  * [Ruby](http://github.com/sukria/Ruby-Spore)
  * [Livescript](https://github.com/unistra/ls-spore)
- * [Groovy](https://github.com/geoffroybeck/gspore)
+ * [Groovy](https://github.com/unistra/gspore)
 
 ## DISCUSSIONS
 
